@@ -53,12 +53,12 @@ def text_to_dict(m, sections):
                 levels_temp[0] = data[group[0]]
                 logger.log(5, 'set levels_temp[0] to data[{}]'.format(name))
 
-            else:
+            elif levels_temp[level - 1] is not None:
                 levels_temp[level - 1][group[0]] = dict()
                 levels_temp[level] = levels_temp[level - 1][group[0]]
                 logger.log(5, 'set levels_temp[{}] to data[{}]'.format(level, group[0]))
 
-        else:
+        elif levels_temp[level - 1] is not None:
             levels_temp[level-1][key] = value
 
 
