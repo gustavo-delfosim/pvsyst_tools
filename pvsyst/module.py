@@ -51,16 +51,17 @@ def pan_to_dict(path):
     m['Technol'] = (data['pvModule']['Technol'])
 
 
-    try:
-        m['DataSource'] = data['pvModule']['pvCommercial']['DataSource']
-        m['YearBeg'] = data['pvModule']['pvCommercial']['YearBeg']
-        m['Comment'] = data['pvModule']['pvCommercial']['Comment']
-        m['Width'] = float(data['pvModule']['pvCommercial']['Width'])
-        m['Height'] = float(data['pvModule']['pvCommercial']['Height'])
-        m['Depth'] = float(data['pvModule']['pvCommercial']['Depth'])
-        m['Weight'] = float(data['pvModule']['pvCommercial']['Weight'])
-    except KeyError:
-        pass
+    for x in ["DataSource", "YearBeg", "Comment"]:
+        try:
+            m[x] = data["pvModule"]["pvCommercial"][x]
+        except KeyError:
+            pass
+
+    for x in ["Width", "Height", "Depth", "Weight"]:
+        try:
+            m[x] = float(data["pvModule"]["pvCommercial"][x])
+        except KeyError:
+            pass
 
     try:
         m['RelEffic800'] = float(data['pvModule']['RelEffic800'])
